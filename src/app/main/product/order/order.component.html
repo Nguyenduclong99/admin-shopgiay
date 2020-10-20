@@ -16,7 +16,6 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
     <!-- Main content -->
     <section class="content">
 
@@ -42,16 +41,16 @@
                           STT
                       </th>
                       <th>
-                          Project Name
+                         Tên khách hàng
                       </th>
                       <th>
-                          Team Members
+                          Số điện thoại
                       </th>
                       <th>
-                          Project Progress
+                          Tổng tiền
                       </th>
                       <th>
-                          Status
+                          Ngày đặt
                       </th>
                         <th>
                           Status
@@ -79,8 +78,9 @@
                         {{ item.total |number }} VNĐ
                       </td>
                       <td>
-                        {{ item.created_at | date:'dd/M/y'}}
+                        {{ item.dateOrder | date:'dd/M/y'}}
                       </td>
+              
                       <td class="project-state">
 
                     <ng-container [ngSwitch]="item.status">
@@ -92,7 +92,7 @@
                           <!-- <span class="badge badge-success">Success</span> -->
                       </td>
                       <td class="project-actions text-left">
-                          <button class="btn btn-primary btn-sm" data-id="item.id" (click)="ViewDetail(item.id)">
+                          <button class="btn btn-primary btn-sm" data-id="item.id_bill" (click)="ViewDetail(item.id)">
                               <i class="fas fa-eye">
                               </i>
                               View

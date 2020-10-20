@@ -25,7 +25,7 @@ export class OrderComponent extends BaseComponent implements OnInit {
     // Lay danh sach don hang
 
     Observable.combineLatest(
-      this._api.get('api/bill/get-bills')).takeUntil(this.unsubcribe).subscribe(
+      this._api.get('api/hoadon/get-bill')).takeUntil(this.unsubcribe).subscribe(
         res => {
           this.list_order = res[0];
           console.log(this.list_order);
