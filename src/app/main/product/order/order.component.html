@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Quản lý sản phẩm</h1>
+            <h1>Quản lý đơn hàng</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -52,9 +52,9 @@
                       <th>
                           Ngày đặt
                       </th>
-                        <th>
+                        <!-- <th>
                           Status
-                      </th>
+                      </th> -->
                       <th> Thao tác
                       </th>
                   </tr>
@@ -80,7 +80,7 @@
                       <td>
                         {{ item.dateOrder | date:'dd/M/y'}}
                       </td>
-              
+<!--               
                       <td class="project-state">
 
                     <ng-container [ngSwitch]="item.status">
@@ -89,8 +89,8 @@
                         <span class="badge badge-secondary" *ngSwitchCase="2">Đã xác thực</span>
                         <span class="badge badge-success" *ngSwitchCase="3">Đã chuyển giao</span>
                     </ng-container>
-                          <!-- <span class="badge badge-success">Success</span> -->
-                      </td>
+                          <span class="badge badge-success">Success</span> 
+                      </td> -->
                       <td class="project-actions text-left">
                           <button class="btn btn-primary btn-sm" data-id="item.id_bill" (click)="ViewDetail(item.id)">
                               <i class="fas fa-eye">
@@ -168,7 +168,7 @@
               <th scope="row">{{ i + 1 }}</th>
               <td>{{ s.name }}</td>
               <td>{{ s.quantity_sale }}</td>
-              <td>{{ s.price | number}} VNĐ</td>
+              <td>{{ s.unit_price | number}} VNĐ</td>
             </tr>
             </ng-container>
 

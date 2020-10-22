@@ -29,8 +29,8 @@ export const mainRoutes: Routes = [
         path: 'user',
         loadChildren: () =>
           import('../main/user/user.module').then((m) => m.UserModule),
-        //canActivate: [RoleGuard],
-        //data: {roles: [Role.Admin]}
+        canActivate: [RoleGuard],
+        data: {roles: [Role.Admin]}
       },
       {
         path: 'manager',
@@ -38,10 +38,10 @@ export const mainRoutes: Routes = [
          import('../main/product/product.module').then(
             (m) => m.ProductModule
           ),
-        // canActivate: [RoleGuard],
-        // data: {roles: [Role.Admin, Role.User]}
+         canActivate: [RoleGuard],
+        data: {roles: [Role.Admin, Role.User]}
       },
-    //  {path: '**', component: NotFoundComponent}
+     {path: '**', component: NotFoundComponent}
     ],
   },
 ];

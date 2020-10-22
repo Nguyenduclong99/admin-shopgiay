@@ -88,8 +88,8 @@ export class ProductComponent extends BaseComponent implements OnInit {
                 this.products = this.products.filter(val => val.iD_product !== id);               
         } 
       )
-      // alert('Xóa thành công!');
-      // location.reload();
+       alert('Xóa thành công!');
+       location.reload();
   }
 
   update(id: any) {
