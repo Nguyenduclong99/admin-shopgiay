@@ -71,7 +71,7 @@
                          {{item.name}}
                       </td>
                       <td>
-                        <img src="{{item.image}}" alt="" height="100px" Width="100px">
+                        <img src="assets\images\product-image\shoe\{{item.image}}" alt="" height="100px" Width="100px">
                       </td>
                       <td>
                        {{item.unit_price |number }} VNĐ
@@ -89,7 +89,7 @@
                               </i>
                               View
                           </a> -->
-                          <button class="btn btn-info btn-sm" style="text-align: right;"  (click)="update(item.id_product)">
+                          <button class="btn btn-info btn-sm" style="text-align: right;"  (click)="update(item.iD_product)">
                               <i class="fas fa-pencil-alt">
                               </i>
                               Edit
@@ -130,7 +130,7 @@
 
             <div class="modal-body">
                 
-
+              <input type="hidden" formControlName="iD_product"  class="form-control" >
               <div class="form-group">
                <label for=""> Tên sản phẩm *</label>
                <input type="text" formControlName="name" class="form-control" >
@@ -160,23 +160,27 @@
                 <textarea  formControlName="description" class="form-control" cols="6" rows="5"></textarea>
              </div>
 
-              <!-- <div class="form-group">
-               <label for=""> Chi tiết *</label>
-               <textarea  formControlName="detail" class="form-control" cols="6" rows="5"></textarea>
-             </div> -->
-
               <div class="form-group">
                <label for="">Ảnh *</label>
-               <input type="file" formControlName="image" class="form-control" >
+               <p-fileUpload #file_image mode="advanced"  [showUploadButton]="false" cancelLabel="Hủy" chooseLabel ="Chọn ảnh"   multiple="false" accept="image/*" maxFileSize="1000000">
+                <ng-template pTemplate="content">
+                    <img *ngIf="product && product.image_url" style="height: 100px;width: 100px;" src="assets/image/{{product.image_url}}">
+                </ng-template>
+          </p-fileUpload>
+
              </div>
 
-              <div class="form-group">
-               <label for=""> Danh mục*</label>
-             <select formControlName="catergory_id" class="form-control">
-               <option  value="A1B75AA1-6EEF-4ED4-8CB8-866255F5F8B1">Adidas</option>
-               <option  selected value="A1B75AA1-6EEF-4ED4-8CB8-866255F5F8B6">Nike </option>
-             </select>
-             </div>
+             <div class="form-group">
+              <label for=""> Danh mục*</label>
+            <select formControlName="catergory_id" class="form-control">
+              <ng-container *ngFor="let c of catergory">
+         <option  [value]="c.category_id">{{ c.name }}</option>
+              </ng-container>
+            </select>
+            <!-- <div *ngIf="submitted && f.category_id">
+                <span *ngIf="f.category_id.required" class="text-danger">Mời chọn danh mục!</span>
+              </div> -->
+            </div>
                <div class="form-group">
                <label for="">Trạng thái *</label>
              <select formControlName="status" class="form-control">

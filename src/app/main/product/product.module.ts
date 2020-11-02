@@ -6,6 +6,7 @@ import { TypeComponent } from './type/type.component';
 import { SharedModule } from 'primeng/api';
 import { OrderComponent } from './order/order.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FileUploadModule } from 'primeng/fileupload';
 
 
 
@@ -26,6 +27,7 @@ const routes: Routes = [
     CommonModule,
     SharedModule,
     ReactiveFormsModule,
+    FileUploadModule
 
 
   ],

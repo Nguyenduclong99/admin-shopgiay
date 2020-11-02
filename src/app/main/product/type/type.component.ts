@@ -19,7 +19,7 @@ export class TypeComponent extends BaseComponent implements OnInit {
   category: any;
   ngOnInit(): void {
       Observable.combineLatest(
-      this._api.get('api/category/get-category'),
+      this._api.get('api/itemgroup/get-menu'),
 
     ).takeUntil(this.unsubcribe).subscribe(
       res=> {

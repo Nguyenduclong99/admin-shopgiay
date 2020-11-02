@@ -71,7 +71,7 @@ Swal.fire({
   if (result.isConfirmed) {
 
      Observable.combineLatest(
-      this._api.get('api/bill/delete-bill/' + id)).takeUntil(this.unsubcribe).subscribe(
+      this._api.get('api/hoadon/delete-bill/' + id)).takeUntil(this.unsubcribe).subscribe(
         res => {
           location.reload();
         }
@@ -84,10 +84,6 @@ Swal.fire({
     );
   }
 })
-
-
-
-
    }
   changeStatus(id: any, msg: any) {
     console.log(msg);

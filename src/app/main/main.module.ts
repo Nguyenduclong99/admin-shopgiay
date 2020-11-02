@@ -29,7 +29,7 @@ export const mainRoutes: Routes = [
         path: 'user',
         loadChildren: () =>
           import('../main/user/user.module').then((m) => m.UserModule),
-        canActivate: [RoleGuard],
+       // canActivate: [RoleGuard],
         data: {roles: [Role.Admin]}
       },
       {
@@ -38,7 +38,7 @@ export const mainRoutes: Routes = [
          import('../main/product/product.module').then(
             (m) => m.ProductModule
           ),
-         canActivate: [RoleGuard],
+         //canActivate: [RoleGuard],
         data: {roles: [Role.Admin, Role.User]}
       },
      {path: '**', component: NotFoundComponent}
