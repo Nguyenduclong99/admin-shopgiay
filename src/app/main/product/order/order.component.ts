@@ -20,7 +20,8 @@ export class OrderComponent extends BaseComponent implements OnInit {
   constructor(injector: Injector) {
     super(injector);
    }
-
+   p: number = 1;
+   term:any;
   ngOnInit(): void {
     // Lay danh sach don hang
 

@@ -57,6 +57,7 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
     InputNumberModule,
     ConfirmDialogModule,
     InputTextareaModule,
+    
   ],
   exports: [
     ReactiveFormsModule,

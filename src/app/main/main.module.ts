@@ -41,7 +41,7 @@ export const mainRoutes: Routes = [
          //canActivate: [RoleGuard],
         data: {roles: [Role.Admin, Role.User]}
       },
-     {path: '**', component: NotFoundComponent}
+    //  {path: '**', component: NotFoundComponent}
     ],
   },
 ];

@@ -37,6 +37,8 @@ export class ProductComponent extends BaseComponent implements OnInit {
   catergory: any;
   iD_product: any;
   submitted: any = false;
+  p: number = 1;
+  term:any;
 
   public pageSize = 3;
   public page = 1;
@@ -169,14 +171,13 @@ export class ProductComponent extends BaseComponent implements OnInit {
                   unit_price: +value.unit_price,
                   promotion_price: +value.promotion_price,
                   description: value.description,
-                  //detail: value.detail,
                   status: +value.status,
                 }).takeUntil(this.unsubcribe).subscribe((res) => {
                   this.message = res;
                   this.products.unshift(this.message);
                   $("#formModal").modal('hide');
                 });
-                location.reload();
+               
               });
             } else {
               console.log(value);
@@ -190,7 +191,6 @@ export class ProductComponent extends BaseComponent implements OnInit {
                   promotion_price: +value.promotion_price,
                   image: data_image,
                   description: value.description,
-                  //detail: value.detail,
                   status: +value.status,
                 }).takeUntil(this.unsubcribe).subscribe((res) => {
                   // this.message = res;
@@ -198,12 +198,9 @@ export class ProductComponent extends BaseComponent implements OnInit {
                   //  location.reload();
                   $("#formModal").modal('hide');
                 });
-                location.reload();
+               // location.reload();
               });
             }
-  
-  
-  
     }
   
     search() {

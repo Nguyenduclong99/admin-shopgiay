@@ -33,6 +33,7 @@
             <i class="fas fa-times"></i></button>
         </div>
       </div>
+      <input type="text" style="width: 250px;"placeholder="Nhập thông tin tìm kiếm" [(ngModel)]="term">
       <div class="card-body p-0">
         <table class="table table-striped projects">
             <thead>
@@ -57,7 +58,7 @@
             </thead>
             <tbody>
 
-              <ng-container *ngFor="let item of category; let i = index">
+              <ng-container *ngFor="let item of category |filter:term | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
 
                 <tr>
                     <td>

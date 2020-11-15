@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor } from './common/error.interceptor';
 import { JwtInterceptor } from './common/jwt.interceptor';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { JwtInterceptor } from './common/jwt.interceptor';
     HttpClientModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+  //  NgxPaginationModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },],

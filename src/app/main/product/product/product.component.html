@@ -23,13 +23,14 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
+          <input type="text" placeholder="Nhập thông tin tìm kiếm" [(ngModel)]="term">
 
-          <button class="btn btn-success btn-sm" (click)="create()">Thêm sản phẩm</button>
+          <button style="float: right;" class="btn btn-success btn-sm" (click)="create()">Thêm sản phẩm</button>
           <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+            <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
               <i class="fas fa-minus"></i></button>
             <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fas fa-times"></i></button>
+              <i class="fas fa-times"></i></button> -->
           </div>
         </div>
 
@@ -61,7 +62,7 @@
               <tbody>
 
 
-                <ng-container *ngFor="let item of products; let i = index">
+                <ng-container *ngFor="let item of products |filter:term | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
 
                   <tr>
                       <td>
@@ -110,6 +111,7 @@
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
 
     </section>
     <!-- /.content -->
@@ -164,7 +166,7 @@
                <label for="">Ảnh *</label>
                <p-fileUpload #file_image mode="advanced"  [showUploadButton]="false" cancelLabel="Hủy" chooseLabel ="Chọn ảnh"   multiple="false" accept="image/*" maxFileSize="1000000">
                 <ng-template pTemplate="content">
-                    <img *ngIf="product && product.image_url" style="height: 100px;width: 100px;" src="assets/image/{{product.image_url}}">
+                    <img *ngIf="product && product.image" style="height: 100px;width: 100px;" src="assets/image/{{product.image}}">
                 </ng-template>
           </p-fileUpload>
 

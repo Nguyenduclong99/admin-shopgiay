@@ -16,6 +16,8 @@ export class TypeComponent extends BaseComponent implements OnInit {
   constructor(injector: Injector, private fb: FormBuilder) {
     super(injector);
   }
+  p: number = 1;
+  term:any;
   category: any;
   ngOnInit(): void {
       Observable.combineLatest(
