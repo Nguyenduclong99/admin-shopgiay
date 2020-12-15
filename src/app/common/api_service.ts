@@ -30,7 +30,6 @@ export class ApiService {
         })
       );
   }
-
   //Http Put
   put(url: string, obj: any) {
     const body = JSON.stringify(obj);

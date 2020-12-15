@@ -1,216 +1,254 @@
- <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Quản lý sản phẩm</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-              <li class="breadcrumb-item active">Sản phẩm</li>
-            </ol>
-          </div>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Quản lý sản phẩm</h1>
         </div>
-      </div><!-- /.container-fluid -->
-    </section>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+            <li class="breadcrumb-item active">Sản phẩm</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
 
-    <!-- Main content -->
-    <section class="content">
+  <!-- Main content -->
+  <section class="content">
+    <!-- Default box -->
+    <div class="card">
+      <div class="card-header">
+        <input
+          type="text"
+          placeholder="Nhập thông tin tìm kiếm"
+          [(ngModel)]="term"
+        />
 
-      <!-- Default box -->
-      <div class="card">
-        <div class="card-header">
-          <input type="text" placeholder="Nhập thông tin tìm kiếm" [(ngModel)]="term">
-
-          <button style="float: right;" class="btn btn-success btn-sm" (click)="create()">Thêm sản phẩm</button>
-          <div class="card-tools">
-            <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+        <button
+          style="float: right"
+          class="btn btn-success btn-sm"
+          (click)="create()"
+        >
+          Thêm sản phẩm
+        </button>
+        <div class="card-tools">
+          <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
               <i class="fas fa-minus"></i></button>
             <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
               <i class="fas fa-times"></i></button> -->
-          </div>
         </div>
+      </div>
 
-
-        <div class="card-body p-0">
-          <table class="table table-striped projects">
-              <thead>
-                  <tr >
-                    <th style=" width: 1%;">
-                      STT
-                    </th>
-                    <th style="text-align: center;">
-                          Tên sản phẩm
-                      </th>
-                      <th style="text-align: center;">
-                        Ảnh
-                      </th>
-                      <th style="text-align: center; ">
-                          Giá
-                      </th>
-                      <th style="text-align: center;">
-                          Status
-                      </th>
-                      <th style="text-align: center;"> 
-                        Thao tác
-                      </th>
-                  </tr>
-              </thead>
-              <tbody>
-
-
-                <ng-container *ngFor="let item of products |filter:term | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
-
-                  <tr>
-                      <td>
-                         {{ i +  1}}
-                      </td>
-                      <td>
-                         {{item.name}}
-                      </td>
-                      <td>
-                        <img src="assets\images\product-image\shoe\{{item.image}}" alt="" height="100px" Width="100px">
-                      </td>
-                      <td>
-                       {{item.unit_price |number }} VNĐ
-                      </td>
-                      <td>
-                       <div *ngIf = "item.status == 1; else title "> 
-                         <span>Hiện</span>
-                        
-                       </div> 
-                       <ng-template  #title> Ẩn</ng-template>
-                    </td>
-                      <td class="project-actions text-left" >
-                          <!-- <a class="btn btn-primary btn-sm" style="text-align: right;" href="#">
+      <div class="card-body p-0">
+        <table class="table table-striped projects">
+          <thead>
+            <tr>
+              <th style="width: 1%">STT</th>
+              <th style="text-align: center">Tên sản phẩm</th>
+              <th style="text-align: center">Ảnh</th>
+              <th style="text-align: center">Giá</th>
+              <th style="text-align: center">Status</th>
+              <th style="text-align: center">Thao tác</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-content> </ng-content>
+            <ng-container
+              *ngFor="
+                let item of products
+                  | filter: term
+                  | paginate: { itemsPerPage: 10, currentPage: p };
+                let i = index
+              "
+            >
+              <tr>
+                <td>
+                  {{ i + 1 }}
+                </td>
+                <td>
+                  {{ item.name }}
+                </td>
+                <td>
+                  <img
+                    src="assets\images\product-image\shoe\{{ item.image }}"
+                    alt=""
+                    height="100px"
+                    Width="100px"
+                  />
+                </td>
+                <td>{{ item.unit_price | number }} VNĐ</td>
+                <td>
+                  <div *ngIf="item.status == 1; else title">
+                    <span>Hiện</span>
+                  </div>
+                  <ng-template #title> Ẩn</ng-template>
+                </td>
+                <td class="project-actions text-left">
+                  <!-- <a class="btn btn-primary btn-sm" style="text-align: right;" href="#">
                               <i class="fas fa-eye">
                               </i>
                               View
                           </a> -->
-                          <button class="btn btn-info btn-sm" style="text-align: right;"  (click)="update(item.iD_product)">
-                              <i class="fas fa-pencil-alt">
-                              </i>
-                              Edit
-                          </button>
-                          <button class="btn btn-danger btn-sm" style="text-align: right;" (click)="delete(item.iD_product)">
-                              <i class="fas fa-trash">
-                              </i>
-                             Delete
-                          </button>
-                      </td>
-                  </tr>
-                  </ng-container>
-
-
-              </tbody>
-          </table>
-        </div>
-        <!-- /.card-body -->
+                  <button
+                    class="btn btn-info btn-sm"
+                    style="text-align: right"
+                    (click)="update(item.iD_product)"
+                  >
+                    <i class="fas fa-pencil-alt"> </i>
+                    Edit
+                  </button>
+                  <button
+                    class="btn btn-danger btn-sm"
+                    style="text-align: right"
+                    (click)="delete(item.iD_product)"
+                  >
+                    <i class="fas fa-trash"> </i>
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
       </div>
-      <!-- /.card -->
-      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<!-- /.modal -->
 
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-     <!-- /.modal -->
+<div class="modal fade" id="formModal">
+  <div class="modal-dialog modal-lg">
+    <form [formGroup]="formData" (ngSubmit)="onSubmitCreate(formData.value)">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Thêm sản phẩm</h4>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
 
-      <div class="modal fade" id="formModal">
-        <div class="modal-dialog modal-lg">
-       <form [formGroup]="formData" (ngSubmit)="onSubmitCreate(formData.value)">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Thêm sản phẩm</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+        <div class="modal-body">
+          <input
+            type="hidden"
+            formControlName="iD_product"
+            class="form-control"
+          />
+          <div class="form-group">
+            <label for=""> Tên sản phẩm *</label>
+            <input type="text" formControlName="name" class="form-control" />
+          </div>
+
+          <div class="row col-md-12">
+            <div class="form-group col-md-4">
+              <label for=""> Số lượng *</label>
+              <input
+                type="number"
+                formControlName="quantity"
+                class="form-control"
+              />
             </div>
 
-            <div class="modal-body">
-                
-              <input type="hidden" formControlName="iD_product"  class="form-control" >
-              <div class="form-group">
-               <label for=""> Tên sản phẩm *</label>
-               <input type="text" formControlName="name" class="form-control" >
-             </div>
+            <div class="form-group col-md-4">
+              <label for=""> Giá *</label>
+              <input
+                type="number"
+                formControlName="unit_price"
+                class="form-control"
+              />
+            </div>
 
-             <div class="row col-md-12">
-                <div class="form-group col-md-4">
-               <label for=""> Số lượng *</label>
-               <input type="number" formControlName="quantity" class="form-control" >
-             </div>
+            <div class="form-group col-md-4">
+              <label for=""> Giá khuyến mại *</label>
+              <input
+                type="number"
+                formControlName="promotion_price"
+                class="form-control"
+              />
+            </div>
+          </div>
 
-              <div class="form-group col-md-4">
-               <label for=""> Giá *</label>
-               <input type="number" formControlName="unit_price" class="form-control" >
-             </div>
+          <div class="form-group">
+            <label for=""> Mô tả *</label>
+            <textarea
+              formControlName="description"
+              class="form-control"
+              cols="6"
+              rows="5"
+            ></textarea>
+          </div>
 
-              <div class="form-group col-md-4">
-               <label for=""> Giá khuyến mại *</label>
-               <input type="number" formControlName="promotion_price" class="form-control" >
-             </div>
-             </div>
+          <div class="form-group">
+            <label for="">Ảnh *</label>
+            <p-fileUpload
+              #file_image
+              mode="advanced"
+              [showUploadButton]="false"
+              cancelLabel="Hủy"
+              chooseLabel="Chọn ảnh"
+              multiple="false"
+              accept="image/*"
+              maxFileSize="1000000"
+            >
+              <ng-template pTemplate="content">
+                <img
+                  *ngIf="product && product.image"
+                  style="height: 100px; width: 100px"
+                  src="assets/images/product-image/shoe/{{ product.image }}"
+                />
+              </ng-template>
+            </p-fileUpload>
+          </div>
 
-
-
-              <div class="form-group">
-               <label for=""> Mô tả *</label>
-                <textarea  formControlName="description" class="form-control" cols="6" rows="5"></textarea>
-             </div>
-
-              <div class="form-group">
-               <label for="">Ảnh *</label>
-               <p-fileUpload #file_image mode="advanced"  [showUploadButton]="false" cancelLabel="Hủy" chooseLabel ="Chọn ảnh"   multiple="false" accept="image/*" maxFileSize="1000000">
-                <ng-template pTemplate="content">
-                    <img *ngIf="product && product.image" style="height: 100px;width: 100px;" src="assets/image/{{product.image}}">
-                </ng-template>
-          </p-fileUpload>
-
-             </div>
-
-             <div class="form-group">
-              <label for=""> Danh mục*</label>
+          <div class="form-group">
+            <label for=""> Danh mục*</label>
             <select formControlName="catergory_id" class="form-control">
               <ng-container *ngFor="let c of catergory">
-         <option  [value]="c.category_id">{{ c.name }}</option>
+                <option [value]="c.category_id">{{ c.name }}</option>
               </ng-container>
             </select>
             <!-- <div *ngIf="submitted && f.category_id">
                 <span *ngIf="f.category_id.required" class="text-danger">Mời chọn danh mục!</span>
               </div> -->
-            </div>
-               <div class="form-group">
-               <label for="">Trạng thái *</label>
-             <select formControlName="status" class="form-control">
-               <option value=0 >Ẩn </option>
-               <option selected  value=1>Hiện </option>
-             </select>
-             </div>
-
-
-            </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Quay lại</button>
-              <button type="submit" class="btn btn-primary">Lưu</button>
-            </div>
-
-
           </div>
-
-
-
-         </form>
-          <!-- /.modal-content -->
+          <div class="form-group">
+            <label for="">Trạng thái *</label>
+            <select formControlName="status" class="form-control">
+              <option value="0">Ẩn</option>
+              <option selected value="1">Hiện</option>
+            </select>
+          </div>
         </div>
-
-        <!-- /.modal-dialog -->
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            Quay lại
+          </button>
+          <button type="submit" class="btn btn-primary">Lưu</button>
+        </div>
       </div>
-      <!-- /.modal -->
-      <!-- <div class="modal fade" id="updateModal">
+    </form>
+    <!-- /.modal-content -->
+  </div>
+
+  <!-- /.modal-dialog -->
+</div>
+
+<!-- /.modal -->
+<!-- <div class="modal fade" id="updateModal">
         <div class="modal-dialog modal-lg">
        <form [formGroup]="formData" (ngSubmit)="updateProduct(product.id,formData.value)">
           <div class="modal-content">

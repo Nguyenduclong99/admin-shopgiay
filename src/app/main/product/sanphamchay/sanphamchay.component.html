@@ -1,0 +1,119 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Sản Phẩm Bán Chạy</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+              <li class="breadcrumb-item active">Sản phẩm bán chạy</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+  
+    <!-- Main content -->
+    <section class="content">
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <input
+            type="text"
+            placeholder="Nhập thông tin tìm kiếm"
+            [(ngModel)]="term"
+          />
+          <div class="card-tools">
+            <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                <i class="fas fa-minus"></i></button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                <i class="fas fa-times"></i></button> -->
+          </div>
+        </div>
+  
+        <div class="card-body p-0">
+          <table class="table table-striped projects">
+            <thead>
+              <tr>
+                <th style="width: 1%">STT</th>
+                <th style="text-align: center">Tên sản phẩm</th>
+                <th style="text-align: center">Ảnh</th>
+                <th style="text-align: center">Giá</th>
+                <th style="text-align: center">Status</th>
+                <th style="text-align: center">Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-content> </ng-content>
+              <ng-container
+                *ngFor="
+                  let item of products
+                    | filter: term
+                    | paginate: { itemsPerPage: 10, currentPage: p };
+                  let i = index
+                "
+              >
+                <tr>
+                  <td>
+                    {{ i + 1 }}
+                  </td>
+                  <td>
+                    {{ item.name }}
+                  </td>
+                  <td>
+                    <img
+                      src="assets\images\product-image\shoe\{{ item.image }}"
+                      alt=""
+                      height="100px"
+                      Width="100px"
+                    />
+                  </td>
+                  <td>{{ item.unit_price | number }} VNĐ</td>
+                  <td>
+                    <div *ngIf="item.status == 1; else title">
+                      <span>Hiện</span>
+                    </div>
+                    <ng-template #title> Ẩn</ng-template>
+                  </td>
+                  <td class="project-actions text-left">
+                    <!-- <a class="btn btn-primary btn-sm" style="text-align: right;" href="#">
+                                <i class="fas fa-eye">
+                                </i>
+                                View
+                            </a> -->
+                    <button
+                      class="btn btn-info btn-sm"
+                      style="text-align: right"
+                      (click)="update(item.iD_product)"
+                    >
+                      <i class="fas fa-pencil-alt"> </i>
+                      Edit
+                    </button>
+                    <button
+                      class="btn btn-danger btn-sm"
+                      style="text-align: right"
+                      (click)="delete(item.iD_product)"
+                    >
+                      <i class="fas fa-trash"> </i>
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  

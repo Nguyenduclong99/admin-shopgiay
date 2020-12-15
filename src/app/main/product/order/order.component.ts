@@ -50,7 +50,6 @@ export class OrderComponent extends BaseComponent implements OnInit {
           console.log(this.order_detail);
           setTimeout(() => {
              $('#myBill').modal('toggle');
-
           });
         }
       );

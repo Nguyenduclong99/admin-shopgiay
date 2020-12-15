@@ -29,7 +29,6 @@ export class ProductComponent extends BaseComponent implements OnInit {
   promotion_price: any;
   image: any;
   description: any;
-  //detail: any;
   status: any;
   message: any;
   products: any;
@@ -39,7 +38,7 @@ export class ProductComponent extends BaseComponent implements OnInit {
   submitted: any = false;
   p: number = 1;
   term:any;
-
+  public billdetail: any;
   public pageSize = 3;
   public page = 1;
   public uploadedFiles: any[] = [];
@@ -48,13 +47,16 @@ export class ProductComponent extends BaseComponent implements OnInit {
   config: any;
 
   @ViewChild(FileUpload, { static: false }) file_image: FileUpload;
-
-
-
-
-
-
-
+  loadPage() {
+    Observable.combineLatest(
+      this._api.get('api/hoadon/get-billdetail/')
+    ).takeUntil(this.unsubcribe).subscribe(
+      res => {
+        this.billdetail = res[0];
+        console.log(this.billdetail);
+      }, err => { }
+    );
+  }
   ngOnInit(): void {
 
   this.formData = this.fb.group({
@@ -82,6 +84,17 @@ export class ProductComponent extends BaseComponent implements OnInit {
       //   this.loadScripts();
       });
       }, err => { })
+
+
+      Observable.combineLatest(
+        this._api.get('api/hoadon/get-billdetail/')
+   ).takeUntil(this.unsubcribe).subscribe(
+     res => {
+       this.billdetail = res[0];
+       console.log(this.billdetail);
+        }, err=> {}
+      )
+
       Observable.combineLatest(this._api.get('api/itemgroup/get-menu')).takeUntil(this.unsubcribe)
       .subscribe(res => {
         this.catergory = res[0];
@@ -91,6 +104,7 @@ export class ProductComponent extends BaseComponent implements OnInit {
   
 
   getProduct(id: any) {
+    console.log("id:", id)
     Observable.combineLatest(
       this._api.get('api/item/get-by-id/'+id)
     ).takeUntil(this.unsubcribe).subscribe(
@@ -101,26 +115,41 @@ export class ProductComponent extends BaseComponent implements OnInit {
     )
   }
 
+
+  checkInBill(id) {
+    let ok = false;
+    if (this.billdetail) {
+      this.billdetail.forEach(element => {
+        if (element.iD_product == id) {
+            ok = true;
+         }
+       });
+    }
+    return ok;
+}
+
   delete(id: any) {
+    console.log("lấy id trong bill:",this.checkInBill(id));
+    if(confirm("Bạn có muốn chắn chắn xóa không!")){
+      if (this.checkInBill(id) == true) {
+         confirm("Cảnh báo: Sản phẩm này đang có trong đơn hàng đã tạo!\nBạn vẫn muốn xóa ?");
+        // this.messageService.add({severity:'warning', summary:'Service Message', detail:'Via MessageService'});
+        }else{
     Observable.combineLatest(
       this._api.get('api/item/delete/' + id)
     ).takeUntil(this.unsubcribe).subscribe(
       res => {
                 this.products = this.products.filter(val => val.iD_product !== id);               
         } 
-      )
+      );
        alert('Xóa thành công!');
-       location.reload();
   }
-
-
+}
+}
 
   update(id: any) {
-
-
     Observable.combineLatest(
     this._api.get('api/item/get-by-id/'+id)
-    
   ).subscribe(
     res => {
       this.product = res[0];

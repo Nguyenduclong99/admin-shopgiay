@@ -1,22 +1,15 @@
 import { Component, Injector, OnInit ,ViewChild} from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser'
 import { Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/common/base-component';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/takeUntil';
-import { FormBuilder, Validators } from '@angular/forms';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { FileUpload } from 'primeng/fileupload';
-declare var $: any;
-
+import { FormBuilder } from '@angular/forms';
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-sanphamchay',
+  templateUrl: './sanphamchay.component.html',
+  styleUrls: ['./sanphamchay.component.css']
 })
-
-export class DashboardComponent extends BaseComponent implements OnInit {
-
+export class SanphamchayComponent extends BaseComponent implements OnInit {
   constructor(injector: Injector, private fb: FormBuilder) {
     super(injector);
   }
