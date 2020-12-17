@@ -70,10 +70,10 @@
                 <td>
                   {{ i + 1 }}
                 </td>
-                <td>
+                <td style="text-align: center;">
                   {{ item.name }}
                 </td>
-                <td>
+                <td style="text-align: center;">
                   <img
                     src="assets\images\product-image\shoe\{{ item.image }}"
                     alt=""
@@ -81,8 +81,8 @@
                     Width="100px"
                   />
                 </td>
-                <td>{{ item.unit_price | number }} VNĐ</td>
-                <td>
+                <td style="text-align: center;">{{ item.unit_price | number }} VNĐ</td>
+                <td style="text-align: center;">
                   <div *ngIf="item.status == 1; else title">
                     <span>Hiện</span>
                   </div>
@@ -151,6 +151,7 @@
           <div class="form-group">
             <label for=""> Tên sản phẩm *</label>
             <input type="text" formControlName="name" class="form-control" />
+            
           </div>
 
           <div class="row col-md-12">
@@ -184,14 +185,13 @@
 
           <div class="form-group">
             <label for=""> Mô tả *</label>
-            <textarea
+            <textarea 
               formControlName="description"
               class="form-control"
               cols="6"
               rows="5"
             ></textarea>
           </div>
-
           <div class="form-group">
             <label for="">Ảnh *</label>
             <p-fileUpload

@@ -153,8 +153,8 @@ export class ProductComponent extends BaseComponent implements OnInit {
   ).subscribe(
     res => {
       this.product = res[0];
-      console.log(this.product);
-      console.log(id);
+      console.log("product:",this.product);
+      console.log("id",id);
       this.catergory_id = this.product.catergory_id;
       setTimeout(() => {
         this.formData.controls['iD_product'].setValue(this.product.iD_product);
@@ -168,8 +168,6 @@ export class ProductComponent extends BaseComponent implements OnInit {
         $(".modal-title").html("Sửa sản phẩm");
         $('#formModal').modal('toggle');
       //  this.formData.reset();
-
-
       });
 
     }
@@ -193,6 +191,7 @@ export class ProductComponent extends BaseComponent implements OnInit {
                 let data_image = data == '' ? null : data;
                 console.log(value);
                 this._api.post('api/item/create-item', {
+                  
                   name: value.name,
                   image: data_image,
                   catergory_id: value.catergory_id,
@@ -213,6 +212,7 @@ export class ProductComponent extends BaseComponent implements OnInit {
               this.getEncodeFromImage(this.file_image).subscribe((data: any): void => {
                 let data_image = data == '' ? null : data;
                 this._api.post('api/item/update-item/' + value.iD_product, {
+                  iD_product: +value.iD_product,
                   name: value.name,
                   catergory_id: value.catergory_id,
                   quantity: +value.quantity,
